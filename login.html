@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Office Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-header">
+            <i class="fas fa-brain"></i>
+            <h1>Smart Office AI</h1>
+            <p>Intelligent IoT Dashboard</p>
+        </div>
+
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="username">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input type="text" id="username" placeholder="Enter username" required value="admin">
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input type="password" id="password" placeholder="Enter password" required value="pass123">
+            </div>
+
+            <div class="form-group">
+                <label for="role">
+                    <i class="fas fa-user-tag"></i> Role
+                </label>
+                <select id="role" required>
+                    <option value="">Select role</option>
+                    <option value="admin" selected>Administrator</option>
+                    <option value="staff">Staff Member</option>
+                    <option value="manager">Office Manager</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-login-submit">
+                <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+            </button>
+
+            <div class="login-footer">
+                <p>Demo Accounts (pre-filled):</p>
+                <p>Admin: admin / pass123</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="index.html" style="color: var(--primary); text-decoration: none;">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Load storage service first -->
+    <script src="services/storage.js"></script>
+    <!-- Then load auth module -->
+    <script src="modules/auth.js"></script>
+    
+    <script>
+        // Auto-fill for easier testing
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Login page loaded');
+            
+            // Check if already logged in
+            const userData = localStorage.getItem('smartoffice_user');
+            if (userData) {
+                const user = JSON.parse(userData);
+                console.log('Already logged in as:', user.username);
+                
+                // Optional: auto-redirect to dashboard
+                // window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

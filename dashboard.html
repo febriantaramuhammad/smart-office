@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Office AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: var(--text-secondary);
+        }
+        
+        .loading i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .avatar-mini {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .user-info-mini {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Load core services first -->
+    <script src="services/storage.js"></script>
+    <script src="services/sensor-simulator.js"></script>
+    
+    <!-- Load modules -->
+    <script src="modules/auth.js"></script>
+    <script src="modules/dashboard.js"></script>
+    
+    <!-- Load main app last -->
+    <script src="app.js"></script>
+    
+    <!-- Sidebar will be injected here -->
+    <div id="sidebar-container"></div>
+
+    <div class="main-content">
+        <!-- Header will be injected here -->
+        <header id="header-container"></header>
+
+        <main class="dashboard-main">
+            <!-- Content will be loaded dynamically -->
+            <div id="content-container">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading dashboard...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="notification-container" class="notification-container"></div>
+    
+    <script>
+        // Fallback jika ada masalah loading
+        setTimeout(function() {
+            const contentContainer = document.getElementById('content-container');
+            const loadingDiv = contentContainer.querySelector('.loading');
+            if (loadingDiv && contentContainer.children.length === 1) {
+                loadingDiv.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Taking longer than expected...</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        Reload Page
+                    </button>
+                `;
+            }
+        }, 5000);
+    </script>
+    <script src="modules/iot-monitoring.js"></script>
+    <script src="modules/device-control.js"></script>
+    <script src="modules/automation.js"></script>
+    <script src="modules/ai-insights.js"></script>
+</body>
+</html>
