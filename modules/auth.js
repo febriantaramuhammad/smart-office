@@ -244,7 +244,7 @@ const AuthModule = (function() {
         } else {
             localStorage.removeItem('smartoffice_user');
         }
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     };
     
     // Initialize on load
